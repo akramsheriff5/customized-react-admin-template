@@ -33,20 +33,16 @@ import Footer from "layouts/authentication/components/Footer";
 function CoverLayout({ color, header, title, description, image, top, children }) {
   return (
     <PageLayout background="white">
-      <DefaultNavbar
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-react",
-          label: "free download",
-          color: "dark",
-        }}
-      />
+    
       <Grid
         container
         justifyContent="center"
         sx={{
-          minHeight: "75vh",
+          minHeight: "100vh",
           margin: 0,
+          width:"auto",
+          height:"auto"
+        
         }}
       >
         <Grid item xs={11} sm={8} md={5} xl={3}>
@@ -93,9 +89,9 @@ function CoverLayout({ color, header, title, description, image, top, children }
               }}
             />
           </SoftBox>
+          
         </Grid>
       </Grid>
-      <Footer />
     </PageLayout>
   );
 }
@@ -106,7 +102,7 @@ CoverLayout.defaultProps = {
   title: "",
   description: "",
   color: "info",
-  top: 20,
+  top: 0,
 };
 
 // Typechecking props for the CoverLayout

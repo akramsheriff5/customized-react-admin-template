@@ -66,41 +66,6 @@ export default function App() {
   const { pathname } = useLocation();
 
 
-const scrollers ={
-  "webkit_scrollbar": {
-    "width": "6px",
-    "height": "6px"
-  },
-  "webkit_scrollbar_button": {
-    "width": "0px",
-    "height": "0px"
-  },
-  "webkit_scrollbar_thumb": {
-    "background": "#227d9b",
-    "border": "0px none #ffffff",
-    "borderRadius": "50px"
-  },
-  "webkit_scrollbar_thumb_hover": {
-    "background": "#2b8da1"
-  },
-  "webkit_scrollbar_thumb_active": {
-    "background": "#1096b7"
-  },
-  "webkit_scrollbar_track": {
-    "background": "#b8b7b7",
-    "border": "62px none #ffffff",
-    "borderRadius": "46px"
-  },
-  "webkit_scrollbar_track_hover": {
-    "background": "#c2bdbd"
-  },
-  "webkit_scrollbar_track_active": {
-    "background": "#a8a8a8"
-  },
-  "webkit_scrollbar_corner": {
-    "background": "transparent"
-  }
-}
 
   // set auth
   let pushRout = useNavigate();
