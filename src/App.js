@@ -22,6 +22,8 @@ import { Routes, Route, Navigate, useLocation,useNavigate } from "react-router-d
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Icon from "@mui/material/Icon";
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -43,12 +45,14 @@ import createCache from "@emotion/cache";
 import routes from "routes";
 
 // Soft UI Dashboard React contexts
-import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
+import { useSoftUIController, setMiniSidenav, setOpenConfigurator ,sidebarToggleMobileMenu} from "context";
 
 // Images
 import brand from "assets/images/logo-ct.png";
 
-
+// burger menu
+import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
+import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
 
 
 export default function App() {
@@ -60,7 +64,44 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
-console.log(pathname,"::::::::::::::::::::::::::::::::::")
+
+
+const scrollers ={
+  "webkit_scrollbar": {
+    "width": "6px",
+    "height": "6px"
+  },
+  "webkit_scrollbar_button": {
+    "width": "0px",
+    "height": "0px"
+  },
+  "webkit_scrollbar_thumb": {
+    "background": "#227d9b",
+    "border": "0px none #ffffff",
+    "borderRadius": "50px"
+  },
+  "webkit_scrollbar_thumb_hover": {
+    "background": "#2b8da1"
+  },
+  "webkit_scrollbar_thumb_active": {
+    "background": "#1096b7"
+  },
+  "webkit_scrollbar_track": {
+    "background": "#b8b7b7",
+    "border": "62px none #ffffff",
+    "borderRadius": "46px"
+  },
+  "webkit_scrollbar_track_hover": {
+    "background": "#c2bdbd"
+  },
+  "webkit_scrollbar_track_active": {
+    "background": "#a8a8a8"
+  },
+  "webkit_scrollbar_corner": {
+    "background": "transparent"
+  }
+}
+
   // set auth
   let pushRout = useNavigate();
   useEffect(() => {
@@ -81,6 +122,25 @@ console.log(pathname,"::::::::::::::::::::::::::::::::::")
   }, []);
 
   // Open sidenav when mouse enter on mini sidenav
+  // Close sidenav when mouse leave mini sidenav
+    // burger menu Iicon toggle
+    const [anchorEl, setAnchorEl] = useState(false);
+    
+
+    const handleClick = () => {
+      // if (miniSidenav && !onMouseEnter) {
+        setAnchorEl(!anchorEl);
+        setMiniSidenav(dispatch, onMouseEnter);
+        setOnMouseEnter(!onMouseEnter);
+      // }
+      // else if (onMouseEnter) {
+        // setMiniSidenav(dispatch, true);
+        // setOnMouseEnter(false);
+      // }
+  
+      
+    };
+
   const handleOnMouseEnter = () => {
     if (miniSidenav && !onMouseEnter) {
       setMiniSidenav(dispatch, false);
@@ -160,8 +220,8 @@ console.log(pathname,"::::::::::::::::::::::::::::::::::")
               brand={brand}
               brandName="Soft UI Dashboard"
               routes={routes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
+              // onMouseEnter={handleOnMouseEnter}
+              // onMouseLeave={handleOnMouseLeave}
             />
             <Configurator />
             {configsButton}
@@ -175,17 +235,33 @@ console.log(pathname,"::::::::::::::::::::::::::::::::::")
       </ThemeProvider>
     </CacheProvider>
   ) : (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} >
       <CssBaseline />
       {layout === "dashboard" && (
         <>
+         <IconButton color={sidenavColor} style={ {
+        position: "fixed",
+        top:"12%",
+        zIndex: "11111",
+        background:"white" ,
+    borderRadius: "50%",
+    boxShadow: "11px 9px 11px 0px rgba(232,227,232,1)",
+    marginLeft:!miniSidenav?"15rem":"6rem",
+    transition: "margin 200ms"
+      }}
+      sx={sidebarToggleMobileMenu }
+      onClick={handleClick}>{!miniSidenav ? <KeyboardArrowLeftSharpIcon /> : <KeyboardArrowRightSharpIcon />}
+      </IconButton>
+
+        
           <Sidenav
             color={sidenavColor}
             brand={brand}
             brandName="Soft UI Dashboard"
             routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
+            
+            // onMouseEnter={handleOnMouseEnter}
+            // onMouseLeave={handleOnMouseLeave}
           />
           <Configurator />
           {configsButton}

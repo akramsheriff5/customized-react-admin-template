@@ -65,7 +65,7 @@ function reducer(state, action) {
 // Soft UI Dashboard React context provider
 function SoftUIControllerProvider({ children }) {
   const initialState = {
-    miniSidenav: false,
+    miniSidenav: true,
     transparentSidenav: true,
     sidenavColor: "info",
     transparentNavbar: true,
@@ -108,6 +108,14 @@ const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGUR
 const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
 const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
 
+const sidebarToggleMobileMenu = ({ breakpoints }) => ({
+  display: "none",
+
+  [breakpoints.up("xl")]: {
+    display: "flex",
+  },
+});
+
 export {
   SoftUIControllerProvider,
   useSoftUIController,
@@ -119,4 +127,5 @@ export {
   setOpenConfigurator,
   setDirection,
   setLayout,
+  sidebarToggleMobileMenu
 };

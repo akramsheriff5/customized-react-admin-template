@@ -26,6 +26,8 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
+import Button from '@mui/material/Button';
+
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -51,11 +53,11 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const collapseName = pathname.split("/").slice(1)[0];
 
   const closeSidenav = () => setMiniSidenav(dispatch, true);
-
+  
   useEffect(() => {
     // A function that sets the mini state of the sidenav.
     function handleMiniSidenav() {
-      setMiniSidenav(dispatch, window.innerWidth < 1200);
+      setMiniSidenav(dispatch, window.innerWidth < 1900);
     }
 
     /** 
@@ -128,7 +130,10 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
   });
 
   return (
+    
     <SidenavRoot {...rest} variant="permanent" ownerState={{ transparentSidenav, miniSidenav }}>
+      
+
       <SoftBox pt={3} pb={1} px={4} textAlign="center">
         <SoftBox
           display={{ xs: "block", xl: "none" }}
@@ -156,8 +161,10 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         </SoftBox>
       </SoftBox>
       <Divider />
-      <List>{renderRoutes}</List>
-      <SoftBox pt={2} my={2} mx={2} mt="auto">
+
+      <List>
+        {renderRoutes}</List>
+      {/* <SoftBox pt={2} my={2} mx={2} mt="auto">
         <SidenavCard />
         <SoftBox mt={2}>
           <SoftButton
@@ -172,7 +179,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             upgrade to pro
           </SoftButton>
         </SoftBox>
-      </SoftBox>
+      </SoftBox> */}
     </SidenavRoot>
   );
 }
